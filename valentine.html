@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? 💘</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .envelope {
+            width: 300px;
+            height: 200px;
+            background: #fff;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .envelope:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: #ffeaa7;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.6s;
+            z-index: 2;
+        }
+
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            z-index: 1;
+        }
+
+        .letter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 280px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 0;
+            transition: all 0.6s 0.3s;
+            opacity: 0;
+        }
+
+        .envelope.open .letter {
+            transform: translate(-50%, -120%) scale(1);
+            opacity: 1;
+            z-index: 3;
+        }
+
+        .question-section {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .question-section.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 20px 50px;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-yes {
+            background: #00b894;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(0,184,148,0.4);
+        }
+
+        .btn-no {
+            background: #fff;
+            color: #ff6b6b;
+            position: relative;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .celebration {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.95);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .celebration.show {
+            display: flex;
+            animation: fadeIn 0.5s;
+        }
+
+        .celebration h2 {
+            font-size: 4rem;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .celebration p {
+            font-size: 2rem;
+            color: #2d3436;
+            margin-bottom: 30px;
+        }
+
+        .big-heart {
+            font-size: 150px;
+            animation: heartbeat 1s infinite;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f00;
+            animation: confetti-fall 3s linear forwards;
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .hint {
+            color: rgba(255,255,255,0.8);
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .subtitle { font-size: 1.1rem; }
+            .btn { padding: 15px 30px; font-size: 1.2rem; }
+            .envelope { width: 250px; height: 160px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-flap"></div>
+            <div class="envelope-body">💌</div>
+            <div class="letter">
+                <p style="color: #ff6b6b; font-size: 1.2rem; line-height: 1.6;">
+                    Open your heart...<br>
+                    I have something<br>
+                    important to ask you<br>
+                    ❤️
+                </p>
+            </div>
+        </div>
+
+        <div class="question-section" id="questionSection">
+            <h1>Will You Be My Valentine?</h1>
+            <p class="subtitle">You're the reason I believe in love 💕</p>
+            
+            <div class="buttons">
+                <button class="btn btn-yes" onclick="sayYes()">YES! 💖</button>
+                <button class="btn btn-no" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No 💔</button>
+            </div>
+            <p class="hint">(Try clicking "No" if you dare... 😏)</p>
+        </div>
+    </div>
+
+    <div class="celebration" id="celebration">
+        <div class="big-heart">💝</div>
+        <h2>SHE SAID YES!</h2>
+        <p>You've made me the happiest person alive!</p>
+        <p style="font-size: 1.2rem; color: #636e72;">I love you to the moon and back 🌙</p>
+    </div>
+
+    <script>
+        let envelopeOpened = false;
+
+        function openEnvelope() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+            
+            const envelope = document.getElementById('envelope');
+            envelope.classList.add('open');
+            
+            setTimeout(() => {
+                envelope.style.display = 'none';
+                document.getElementById('questionSection').classList.add('show');
+            }, 1500);
+        }
+
+        function moveNo() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * (window.innerHeight - 100);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.transition = 'all 0.3s';
+        }
+
+        function sayYes() {
+            const celebration = document.getElementById('celebration');
+            celebration.classList.add('show');
+            
+            // Create confetti
+            const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#ff9ff3', '#54a0ff'];
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 30);
+            }
+
+            // Launch hearts
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '❤️';
+                    heart.style.position = 'fixed';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.bottom = '-50px';
+                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                    heart.style.animation = 'float 4s ease-in forwards';
+                    heart.style.zIndex = '1001';
+                    document.body.appendChild(heart);
+                    setTimeout(() => heart.remove(), 4000);
+                }, i * 100);
+            }
+        }
+
+        // Auto-open envelope after 3 seconds if not clicked
+        setTimeout(() => {
+            if (!envelopeOpened) openEnvelope();
+        }, 3000);
+    </script>
+</body>
+</html>

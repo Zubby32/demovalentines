@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(to bottom, #ffeaa7 0%, #fab1a0 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            color: #d63031;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #e17055;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #ffd93d);
+            border-radius: 2px;
+        }
+
+        .memory-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            width: 45%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .memory-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .memory-card:nth-child(odd) {
+            margin-left: auto;
+            margin-right: 55%;
+        }
+
+        .memory-card:nth-child(even) {
+            margin-left: 55%;
+        }
+
+        .memory-card::before {
+            content: '💝';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .memory-card:nth-child(odd)::before {
+            right: -68px;
+            transform: translateY(-50%);
+        }
+
+        .memory-card:nth-child(even)::before {
+            left: -68px;
+            transform: translateY(-50%);
+        }
+
+        .memory-date {
+            color: #ff6b6b;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .memory-title {
+            color: #2d3436;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .memory-text {
+            color: #636e72;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d63031;
+            font-size: 3rem;
+            border: 3px dashed #ff6b6b;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(255,255,255,0.3);
+            margin-top: 60px;
+        }
+
+        .cta-text {
+            font-size: 2rem;
+            color: #d63031;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .btn {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255,107,107,0.4);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(255,107,107,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before { left: 30px; }
+            .memory-card { width: calc(100% - 80px); margin-left: 80px !important; margin-right: 0 !important; }
+            .memory-card::before { left: -50px !important; right: auto !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Our Beautiful Journey</h1>
+        <p>Every moment with you is a treasure ✨</p>
+    </div>
+
+    <div class="timeline">
+        <div class="memory-card">
+            <div class="memory-date">The Day We Met 💫</div>
+            <div class="memory-title">When Everything Changed</div>
+            <div class="memory-text">I still remember the exact moment I saw you. My heart knew before I did that you were someone special...</div>
+            <img src="Photos\pic1.jpeg" style="width:100%; border-radius:10px;">
+        </div>
+
+        <div class="memory-card">
+            <div class="memory-date">Our First Date 🌹</div>
+            <div class="memory-title">Nervous but Perfect</div>
+            <div class="memory-text">I was so nervous I almost frozed, but your smile made everything feel right. Time stopped when you smiled...</div>
+               <img src="Photos\pic2.jpeg" style="width:100%; border-radius:10px;">
+        </div>
+
+        <div class="memory-card">
+            <div class="memory-date">That Random Tuesday 💕</div>
+            <div class="memory-title">Just Because You're You</div>
+            <div class="memory-text">It wasn't a special occasion, but lying next to you doing nothing felt like the best day of my life...</div>
+             <img src="Photos\pic4.jpeg" style="width:100%; border-radius:10px;">
+        </div>
+
+        <div class="memory-card">
+            <div class="memory-date">Every Single Day 🌟</div>
+            <div class="memory-title">Falling More in Love</div>
+            <div class="memory-text">With every text, every call, every hug, I fall for you a little more. You're my favorite notification...</div>
+             <img src="Photos\pic3.jpeg" style="width:100%; border-radius:10px;">
+        </div>
+    </div>
+
+    <div class="cta-section">
+        <p class="cta-text">And now... I have a question 💍</p>
+        <a href="valentine.html" class="btn">Are you ready? 💝</a>
+    </div>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.memory-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.bottom = '-50px';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            heart.style.opacity = '0.6';
+            heart.style.pointerEvents = 'none';
+            heart.style.zIndex = '1000';
+            heart.style.animation = `float ${Math.random() * 5 + 5}s linear`;
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 10000);
+        }
+
+        setInterval(createHeart, 800);
+    </script>
+</body>
+</html>
